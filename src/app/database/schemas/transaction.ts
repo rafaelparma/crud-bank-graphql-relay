@@ -20,6 +20,11 @@ const TransactionSchema: Schema = new Schema({
     ref: 'Account', 
     required: true 
   },
+  txId: {
+    type: String,
+    required: true,
+    unique: true
+  },  
   amount: { 
     type: Number, 
     required: true

@@ -59,7 +59,8 @@ import { TransactionModel } from '../../../database/schemas/transaction';
           const fromAccountId = await accountLoader.load(transaction.toAccountId.toString());          
           return fromAccountId ? fromAccountId.name : null;
         }
-      },    
+      },  
+      txId: { type: GraphQLString },    
       amount: { type: GraphQLInt },
       createdAt: { 
         type: GraphQLString,

@@ -1,4 +1,4 @@
-import { GraphQLID, GraphQLInt, GraphQLNonNull } from 'graphql';
+import { GraphQLID, GraphQLInt, GraphQLString, GraphQLNonNull } from 'graphql';
 import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
   import { AccountModel, IAccount } from '../../../database/schemas/account';
   import { TransactionModel } from '../../../database/schemas/transaction';
@@ -11,6 +11,7 @@ const createTransactionMutation = mutationWithClientMutationId({
     inputFields: {
       fromAccountId: { type: GraphQLNonNull(GraphQLID) },
       toAccountId: { type: GraphQLNonNull(GraphQLID) },
+      txId: { type: GraphQLNonNull(GraphQLString) },
       amount: { type: GraphQLNonNull(GraphQLInt) },
     },
     outputFields: {
@@ -22,6 +23,11 @@ const createTransactionMutation = mutationWithClientMutationId({
     mutateAndGetPayload: async (args) => {
 
       try {
+
+        const transaction_txid = await TransactionModel.find({txId: args.txId}).exec();
+        if (transaction_txid.length > 0 ) {
+          throw new Error (`Transaction ID ${args.txId} already exists`);
+        }
 
         const fromAccountIdGlobalId = fromGlobalId(args.fromAccountId).id;
         const toAccountIdGlobalId = fromGlobalId(args.toAccountId).id;
@@ -40,6 +46,7 @@ const createTransactionMutation = mutationWithClientMutationId({
         const transaction = new TransactionModel({
           fromAccountId: fromAccountIdGlobalId,
           toAccountId: toAccountIdGlobalId,
+          txId: args.txId,
           amount: args.amount,
         });
 

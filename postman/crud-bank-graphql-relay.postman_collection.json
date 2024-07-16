@@ -134,7 +134,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query Transactions {\r\n    transactions {\r\n        edges {\r\n            cursor\r\n            node {\r\n                id\r\n                fromAccountId\r\n                fromAccountName\r\n                toAccountId\r\n                toAccountName\r\n                amount\r\n                createdAt\r\n            }\r\n        }\r\n        pageInfo {\r\n            hasNextPage\r\n            hasPreviousPage\r\n            startCursor\r\n            endCursor\r\n        }\r\n    }\r\n}\r\n",
+						"query": "query Transactions {\r\n    transactions {\r\n        edges {\r\n            cursor\r\n            node {\r\n                id\r\n                fromAccountId\r\n                fromAccountName\r\n                toAccountId\r\n                toAccountName\r\n                txId\r\n                amount\r\n                createdAt\r\n            }\r\n        }\r\n        pageInfo {\r\n            hasNextPage\r\n            hasPreviousPage\r\n            startCursor\r\n            endCursor\r\n        }\r\n    }\r\n}\r\n",
 						"variables": ""
 					}
 				},
@@ -158,8 +158,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation CreateTransaction ($fromAccountId: ID!, $toAccountId: ID!, $amount: Int!) {\r\n    createTransaction(input: {fromAccountId: $fromAccountId, toAccountId: $toAccountId, amount: $amount }) {\r\n        transaction {\r\n            id\r\n            fromAccountId\r\n            fromAccountName\r\n            toAccountId\r\n            toAccountName\r\n            amount\r\n            createdAt\r\n        }\r\n    }\r\n}\r\n",
-						"variables": "{\r\n    \"fromAccountId\": \"QWNjb3VudDo2NjkyYmRjZDhkMDZlYTA1NjMyMGVhOWQ=\",\r\n    \"toAccountId\": \"QWNjb3VudDo2NjkyYmUwODhkMDZlYTA1NjMyMGVhYTU=\",\r\n    \"amount\": 50\r\n}"
+						"query": "mutation CreateTransaction ($fromAccountId: ID!, $toAccountId: ID!, $txId: String!, $amount: Int!) {\r\n    createTransaction(input: {fromAccountId: $fromAccountId, \r\n    toAccountId: $toAccountId, txId: $txId, amount: $amount }) {\r\n        transaction {\r\n            id\r\n            fromAccountId\r\n            fromAccountName\r\n            toAccountId\r\n            toAccountName\r\n            txId\r\n            amount\r\n            createdAt\r\n        }\r\n    }\r\n}\r\n",
+						"variables": "{\r\n    \"fromAccountId\": \"QWNjb3VudDo2Njk2ZDZjYWVhMTI0YmNjNDUyMGI0Njg=\",\r\n    \"toAccountId\": \"QWNjb3VudDo2Njk2ZDZiYmVhMTI0YmNjNDUyMGI0NjU=\",\r\n    \"txId\": \"12324\",\r\n    \"amount\": 50\r\n}"
 					}
 				},
 				"url": {
@@ -182,8 +182,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query TransactionById ($id: ID!) {\r\n    transactionById(id: $id) {\r\n        id\r\n        fromAccountId\r\n        fromAccountName\r\n        toAccountId\r\n        toAccountName\r\n        amount\r\n        createdAt\r\n    }\r\n}\r\n",
-						"variables": "{\r\n    \"id\": \"VHJhbnNhY3Rpb246NjY5MmJlOTg4ZDA2ZWEwNTYzMjBlYWI1\"\r\n}"
+						"query": "query TransactionById ($id: ID!) {\r\n    transactionById(id: $id) {\r\n        id\r\n        fromAccountId\r\n        fromAccountName\r\n        toAccountId\r\n        toAccountName\r\n        txId\r\n        amount\r\n        createdAt\r\n    }\r\n}\r\n",
+						"variables": "{\r\n    \"id\": \"VHJhbnNhY3Rpb246NjY5MzBhNDBiYmIzOWI4Yjk1ZGM2MzY1\"\r\n}"
 					}
 				},
 				"url": {
